@@ -22,6 +22,12 @@ RUN apt-get install -yq \
 WORKDIR /home
 RUN git clone https://github.com/facebook/proxygen.git
 WORKDIR /home/proxygen/proxygen
+
+VOLUME /home/proxygen/proxygen
+EXPOSE 11000
+EXPOSE 11001
+EXPOSE 11002
+
 RUN ./deps.sh && ./reinstall.sh
 WORKDIR /home/proxygen/proxygen/httpserver/samples/echo
 RUN g++ -std=c++11 -o my_echo EchoServer.cpp EchoHandler.cpp -lproxygenhttpserver -lfolly -lglog -lgflags -pthread
